@@ -5,21 +5,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Adding Blog Post</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Update Post</title>
 </head>
 <body>
-    <form action="/add" method="post">
+<h1>Update Blog</h1>
+<form action="{{ url_for('update', post_id=post.id) }}" method="post">
         <label for="title">Blogtitle</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" value= "{{ post['title'] }}" required>
         <br><br>
         <label for="content">Content</label>
-        <textarea type="text" id="content" name="content" required></textarea>
+    <textarea type="text" id="content" name="content"required>{{ post['content'] }}</textarea>
         <br><br>
         <label for="author">Author</label>
-        <input type="text" id="author" name="author" required>
+        <input type="text" id="author" name="author"  value= "{{ post['author'] }}"required>
         <br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Update">
     </form>
 
 </body>
