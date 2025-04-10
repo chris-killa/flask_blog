@@ -14,8 +14,10 @@ def index():
 def add():
     if request.method == 'POST':
         blog_posts = load_posts()
+        new_id = max([post['id'] for post in blog_posts], default=0) + 1
+
         new_post = {
-            "id" : len(blog_posts)+1,
+            "id" : new_id,
             "title" : request.form.get('title'),
             "content" : request.form.get('content'),
             "author" : request.form.get('author'),
@@ -45,10 +47,11 @@ def update(post_id):
         post['title'] = request.form['title']
         post['content'] = request.form['content']
         post['author'] = request.form['author']
-        post['likes'] = 0
+        if 'reset_likes' in request.form:
+            post['likes'] = 0
         save_posts(blog_posts)
         return redirect(url_for('index'))
-    return render_template('index.html', post=post)
+    return render_template('update.html', post=post)
 
 @app.route('/like/<int:id>',  methods=['POST'])
 def like(id):

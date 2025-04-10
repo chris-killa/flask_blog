@@ -8,12 +8,18 @@
 </head>
 <body>
     <h1>Welcome to My Flask Blog!</h1>
+    <div id="special-button">
+        <a href=" {{url_for('add') }}">
+        <button type="button">Add blog post</button>
+    </a>
+    </div>
+
     {% for post in posts %}
     <div class="post">
         <h2>{{ post.title }}</h2>
         <p><em>Written by {{ post.author }}</em></p>
         <p>{{ post.content }}</p>
-         <form action= "{{ url_for('delete', post_id=post.id) }}" method="get">
+        <div class="CRUD"><form action= "{{ url_for('delete', post_id=post.id) }}" method="get">
              <input type="submit" value="Delete"></form>
         <form action = "{{ url_for('update', post_id=post.id) }}" method="get">
             <input type="submit" value="update">
@@ -21,10 +27,10 @@
         <form action = "{{ url_for('like', id=post['id']) }}" method="post">
             <input type="submit" value="Like ({{ post['likes'] }})">
         </form>
+        </div>
+
     </div>
     {% endfor %}
-<!--    <form action = "{{ url_for('add') }}" method="post">-->
-<!--            <input type="submit" value="Add">-->
-<!--        </form>-->
+
 </body>
 </html>
